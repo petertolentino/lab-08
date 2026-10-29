@@ -46,4 +46,24 @@ class WizardTest {
 
         assertEquals(70, evilWizard.mana)
     }
+
+    @Test
+    fun train_successful() {
+        evilWizard.train()
+
+        assertEquals(11, evilWizard.spellPower) // 10 + 1 = 11, so spell power should be 11
+        assertEquals(25, evilWizard.mana) // 30 - 5 = 25, so mana should be 25
+    }
+
+
+    @Test
+    fun train_unsuccessful() {
+        evilWizard.mana = 4 // not enough mana to train
+        val spellPowerBefore = evilWizard.spellPower
+
+        evilWizard.train()
+
+        assertEquals(spellPowerBefore, evilWizard.spellPower) // spell power doesn't change
+        assertEquals(4, evilWizard.mana) // mana is still 4
+    }
 }
